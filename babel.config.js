@@ -6,8 +6,8 @@ module.exports = function (api) {
       "nativewind/babel",
     ],
     plugins: [
-      // এখানে অন্যান্য plugin থাকলে আগে আসবে
-      "react-native-reanimated/plugin", // সবশেষে রাখতে হবে
+      // "expo-router/bable",
+      "react-native-reanimated/plugin", 
     ],
   };
 };

@@ -7,10 +7,7 @@ export default function HomeScreen() {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTime(new Date());
-    }, 1000);
-
+    const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
@@ -35,62 +32,61 @@ export default function HomeScreen() {
 
         {/* Grid Buttons */}
         <View className="flex-row flex-wrap justify-around mt-2">
-          <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-purple-100 shadow">
-            <Ionicons name="calendar" size={30} color="blue" />
-            <Link href="/visit" className="mt-2 text-sm font-medium">
-              Visits
-            </Link>
-          </TouchableOpacity>
+          <Link href="/visit" asChild>
+            <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-purple-100 shadow">
+              <Ionicons name="calendar" size={30} color="blue" />
+              <Text className="mt-2 text-sm font-medium">Visits</Text>
+            </TouchableOpacity>
+          </Link>
 
-          <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-red-100 shadow">
-            <Ionicons name="person" size={30} color="blue" />
-            <Link href="/client" className="mt-2 text-sm font-medium">
-              Client
-            </Link>
-          </TouchableOpacity>
+          <Link href="/client" asChild>
+            <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-red-100 shadow">
+              <Ionicons name="person" size={30} color="blue" />
+              <Text className="mt-2 text-sm font-medium">Client</Text>
+            </TouchableOpacity>
+          </Link>
 
-          <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-emerald-100 shadow">
-            <Ionicons name="medkit" size={30} color="blue" />
-            <Link href="/hospital" className="mt-2 text-sm font-medium">
-              Hospitals
-            </Link>
-          </TouchableOpacity>
+          <Link href="/hospital" asChild>
+            <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-emerald-100 shadow">
+              <Ionicons name="medkit" size={30} color="blue" />
+              <Text className="mt-2 text-sm font-medium">Hospitals</Text>
+            </TouchableOpacity>
+          </Link>
 
-          <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-gray-100 shadow">
-            <Ionicons name="document-text" size={30} color="blue" />
-            <Link href="/report" className="mt-2 text-sm font-medium">
-              Report
-            </Link>
-          </TouchableOpacity>
+          <Link href="/report" asChild>
+            <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-gray-100 shadow">
+              <Ionicons name="document-text" size={30} color="blue" />
+              <Text className="mt-2 text-sm font-medium">Report</Text>
+            </TouchableOpacity>
+          </Link>
 
-          <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-cyan-100 shadow">
-            <Ionicons name="notifications" size={30} color="blue" />
-            <Link href="/reminder" className="mt-2 text-sm font-medium">
-              Reminder
-            </Link>
-          </TouchableOpacity>
+          <Link href="/reminder" asChild>
+            <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-cyan-100 shadow">
+              <Ionicons name="notifications" size={30} color="blue" />
+              <Text className="mt-2 text-sm font-medium">Reminder</Text>
+            </TouchableOpacity>
+          </Link>
 
-          <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-indigo-100 shadow">
-            <Ionicons name="settings" size={30} color="blue" />
-            <Link href="/admin" className="mt-2 text-sm font-medium">
-              Admin
-            </Link>
-          </TouchableOpacity>
+          <Link href="/admin" asChild>
+            <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-indigo-100 shadow">
+              <Ionicons name="settings" size={30} color="blue" />
+              <Text className="mt-2 text-sm font-medium">Admin</Text>
+            </TouchableOpacity>
+          </Link>
 
-          <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-yellow-100 shadow">
-            <Ionicons name="camera" size={30} color="blue" />
-            <Link href="/camera" className="mt-2 text-sm font-medium">
-              Camera
-            </Link>
-          </TouchableOpacity>
+          <Link href="/camera" asChild>
+            <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-yellow-100 shadow">
+              <Ionicons name="camera" size={30} color="blue" />
+              <Text className="mt-2 text-sm font-medium">Camera</Text>
+            </TouchableOpacity>
+          </Link>
 
-          {/* 📍 Location Button */}
-          <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-green-100 shadow">
-            <Ionicons name="location" size={30} color="blue" />
-            <Link href="/location" className="mt-2 text-sm font-medium">
-              Location
-            </Link>
-          </TouchableOpacity>
+          <Link href="/location" asChild>
+            <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-green-100 shadow">
+              <Ionicons name="location" size={30} color="blue" />
+              <Text className="mt-2 text-sm font-medium">Location</Text>
+            </TouchableOpacity>
+          </Link>
         </View>
       </ScrollView>
     </SafeAreaView>
