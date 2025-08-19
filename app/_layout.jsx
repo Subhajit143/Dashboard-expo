@@ -5,7 +5,7 @@ export default function RootLayout() {
   return (
     <Stack>
       {/* Drawer navigator as a screen */}
-      <Stack.Screen name="(drawer)" />
+      <Stack.Screen name="(drawer)" options={{headerShown : false}} />
       <Stack.Screen name="index" options={{ title: "Home" }} />
       <Stack.Screen name="client/index" options={{ title: "Client" }} />
       <Stack.Screen name="admin/index" options={{ title: "Admin" }} />
