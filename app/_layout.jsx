@@ -14,7 +14,7 @@ export default function RootLayout() {
       <Drawer.Screen name="camera/index" options={{ title: "Camera" }} />
       <Drawer.Screen name="location/index" options={{ title: "Location" }} />
 
-      {/* Hidden screens (won’t show in sidebar) */}
+      
       <Drawer.Screen 
         name="visit/index" 
         options={{ drawerItemStyle: { display: "none" } }} 
