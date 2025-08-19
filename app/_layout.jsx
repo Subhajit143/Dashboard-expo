@@ -1,19 +1,28 @@
-import { Stack } from "expo-router";
+import { Drawer } from "expo-router/drawer";
 import "../global.css";
 
 export default function RootLayout() {
   return (
-    <Stack>
-      {/* Drawer navigator as a screen */}
-      <Stack.Screen name="(drawer)" options={{headerShown : false}} />
-      <Stack.Screen name="index" options={{ title: "Home" }} />
-      <Stack.Screen name="client/index" options={{ title: "Client" }} />
-      <Stack.Screen name="admin/index" options={{ title: "Admin" }} />
-      <Stack.Screen name="hospital/index" options={{ title: "Hospital" }} />
-      <Stack.Screen name="reminder/index" options={{ title: "Reminder" }} />
-      <Stack.Screen name="report/index" options={{ title: "Report" }} />
-      <Stack.Screen name="camera/index" options={{ title: "Camera" }} />
-      <Stack.Screen name="location/index" options={{ title: "Location" }} />
-    </Stack>
+    <Drawer>
+      {/* Your visible screens */}
+      <Drawer.Screen name="index" options={{ title: "Baidya Healthcare" }} />
+      <Drawer.Screen name="client/index" options={{ title: "Client" }} />
+      <Drawer.Screen name="admin/index" options={{ title: "Admin" }} />
+      <Drawer.Screen name="hospital/index" options={{ title: "Hospital" }} />
+      <Drawer.Screen name="reminder/index" options={{ title: "Reminder" }} />
+      <Drawer.Screen name="report/index" options={{ title: "Report" }} />
+      <Drawer.Screen name="camera/index" options={{ title: "Camera" }} />
+      <Drawer.Screen name="location/index" options={{ title: "Location" }} />
+
+      {/* Hidden screens (won’t show in sidebar) */}
+      <Drawer.Screen 
+        name="visit/index" 
+        options={{ drawerItemStyle: { display: "none" } }} 
+      />
+      <Drawer.Screen 
+        name="(drawer)" 
+        options={{ drawerItemStyle: { display: "none" } }} 
+      />
+    </Drawer>
   );
 }
