@@ -1,20 +1,38 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  Linking,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import MapView, { Marker } from "react-native-maps";
+import { useImage } from "../context/ImageContext";
 
 export default function HomeScreen() {
   const [time, setTime] = useState(new Date());
+  const { imageUri, location } = useImage();
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
-  const hours = time.getHours() % 12 || 12; // 12-hr format
+  const hours = time.getHours() % 12 || 12;
   const minutes = time.getMinutes().toString().padStart(2, "0");
   const seconds = time.getSeconds().toString().padStart(2, "0");
   const ampm = time.getHours() >= 12 ? "PM" : "AM";
+
+  const openLocationInMaps = () => {
+    if (location) {
+      const url = `https://www.google.com/maps?q=${location.latitude},${location.longitude}`;
+      Linking.openURL(url);
+    }
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-white">
@@ -29,6 +47,69 @@ export default function HomeScreen() {
             <Text className="text-sm text-blue-500 mt-2">Start Working</Text>
           </View>
         </View>
+
+        {/* Image Section - Only show if there's an image */}
+        {imageUri && (
+          <View className="mx-4 my-4 p-4 bg-gray-100 rounded-lg">
+            <Text className="text-lg font-bold mb-2">Last Captured Image</Text>
+
+            {/* Image */}
+            <Image
+              source={{ uri: imageUri }}
+              style={{ width: "100%", height: 200, borderRadius: 8 }}
+              resizeMode="cover"
+            />
+          </View>
+        )}
+
+        {/* Location Section - Only show if there's location data */}
+        {location && (
+          <View className="mx-4 my-4 p-4 bg-gray-100 rounded-lg">
+            <Text className="text-lg font-bold mb-2">📍 Current Location</Text>
+
+            {/* Map */}
+            <View className="h-64 rounded-lg overflow-hidden my-2">
+              <MapView
+                style={{ width: "100%", height: "100%" }}
+                initialRegion={{
+                  latitude: location.latitude,
+                  longitude: location.longitude,
+                  latitudeDelta: 0.005,
+                  longitudeDelta: 0.005,
+                }}
+              >
+                <Marker
+                  coordinate={{
+                    latitude: location.latitude,
+                    longitude: location.longitude,
+                  }}
+                  title="Your Location"
+                />
+              </MapView>
+            </View>
+
+            {/* Location Data */}
+            <View className="mt-4">
+              <Text className="text-md font-semibold mb-1">
+                Location Details:
+              </Text>
+              <Text className="text-sm">Latitude: {location.latitude}</Text>
+              <Text className="text-sm">Longitude: {location.longitude}</Text>
+              {location.accuracy && (
+                <Text className="text-sm">
+                  Accuracy: {location.accuracy.toFixed(2)} meters
+                </Text>
+              )}
+
+              <TouchableOpacity
+                className="mt-3 bg-blue-500 py-2 px-4 rounded-lg items-center"
+                onPress={openLocationInMaps}
+              >
+                <Text className="text-white">Open in Google Maps</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
 
         {/* Grid Buttons */}
         <View className="flex-row flex-wrap justify-around mt-2">
@@ -85,6 +166,20 @@ export default function HomeScreen() {
             <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-green-100 shadow">
               <Ionicons name="location" size={30} color="blue" />
               <Text className="mt-2 text-sm font-medium">Location</Text>
+            </TouchableOpacity>
+          </Link>
+
+          <Link href="/image-preview" asChild>
+            <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-pink-100 shadow">
+              <Ionicons name="image" size={30} color="blue" />
+              <Text className="mt-2 text-sm font-medium">Image Preview</Text>
+            </TouchableOpacity>
+          </Link>
+
+          <Link href="/location-preview" asChild>
+            <TouchableOpacity className="w-[40%] h-28 my-2 rounded-2xl items-center justify-center bg-teal-100 shadow">
+              <Ionicons name="map" size={30} color="blue" />
+              <Text className="mt-2 text-sm font-medium">Location Preview</Text>
             </TouchableOpacity>
           </Link>
         </View>
