@@ -16,10 +16,12 @@ export const ImageProvider = ({ children }) => {
   const [location, setLocation] = useState(null);
 
   const updateImage = (uri) => {
+    console.log('Updating image URI:', uri);
     setImageUri(uri);
   };
 
   const updateLocation = (loc) => {
+    console.log('Updating location:', loc);
     setLocation(loc);
   };
 
